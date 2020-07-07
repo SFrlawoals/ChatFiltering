@@ -4,6 +4,7 @@ window.onload = function(){
  //DOM 참조
  var div = document.getElementById('message');
  var txt = document.getElementById('txtChat');
+ var name = document.getElementById('name');
  //텍스트 박스에 포커스 주기 
  txt.focus();
  
@@ -15,7 +16,7 @@ window.onload = function(){
    var message = event.target.value;
    if(message){
      //소켓서버 함수 호출  
-     socket.emit('serverReceiver', message);
+     socket.emit('serverReceiver', name.value,message);
      //텍스트박스 초기화
      txt.value = '';
    }
@@ -26,7 +27,7 @@ window.onload = function(){
  socket.on('clientReceiver', function(data){  
    //console.log('서버에서 전송:', data);   
    //채팅창에 메세지 출력하기
-   var message = '['+ data.clientID + '님의 말' + '] ' + data.message;
+   var message = '['+ data.name + '님의 말' + '] ' + data.message;
    div.innerText += message + '\r\n';
    //채팅창 스크롤바 내리기  
    div.scrollTop = div.scrollHeight;   

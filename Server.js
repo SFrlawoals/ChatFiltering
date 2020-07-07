@@ -34,8 +34,8 @@ socket.sockets.on('connection', function(client){
   console.log('Connection: '+ clientID);
  
   //서버 receive 이벤트 함수(클라이언트에서 호출 할 이벤트)    
-  client.on('serverReceiver', function(value){
+  client.on('serverReceiver', function(name,value){
     //클라이언트 이베트 호출     
-    socket.sockets.emit('clientReceiver', {clientID: clientID, message: value});  
+    socket.sockets.emit('clientReceiver', {name: name, message: value});  
   });
 });
